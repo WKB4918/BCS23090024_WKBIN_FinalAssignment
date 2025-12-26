@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="BCS23090024_WKBIN_FinalAssignment.MainPage"
+             Title="FLIGHT TELEMETRY SYSTEM">
+
+    <Grid>
+        <Image Source="flight_map_bg.webp" 
+               Aspect="AspectFill" 
+               Opacity="0.15" />
+
+        <ScrollView VerticalOptions="Center">
+            <Grid Padding="25" RowSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <VerticalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="Center">
+                    <Label Text="AIRCRAFT TELEMETRY SYSTEM" 
+                           FontSize="24" FontAttributes="Bold" 
+                           TextColor="#2196F3" HorizontalOptions="Center"/>
+                    <BoxView Color="#2196F3" HeightRequest="2" WidthRequest="150" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <Border Grid.Row="1" 
+        Stroke="#2196F3" 
+        StrokeThickness="2" 
+        Padding="20" 
+        BackgroundColor="White" 
+        Opacity="0.9">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="18">
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Label Grid.Column="0" Text="LATITUDE:" FontAttributes="Bold" WidthRequest="110" TextColor="Gray"/>
+                            <Label Grid.Column="1" x:Name="lblLatitude" Text="Waiting for GPS..." FontSize="18" FontAttributes="Bold"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Label Grid.Column="0" Text="LONGITUDE:" FontAttributes="Bold" WidthRequest="110" TextColor="Gray"/>
+                            <Label Grid.Column="1" x:Name="lblLongitude" Text="Waiting for GPS..." FontSize="18" FontAttributes="Bold"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Label Grid.Column="0" Text="NETWORK:" FontAttributes="Bold" WidthRequest="110" TextColor="Gray"/>
+                            <Label Grid.Column="1" x:Name="lblConnectivity" Text="Checking..." FontSize="18" TextColor="Orange" FontAttributes="Bold"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+                
+                <Grid Grid.Row="2" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                    <Entry x:Name="entryTripID" 
+                           Grid.Column="0"
+                           Placeholder="Enter Flight ID (e.g. OD1906)" 
+                           PlaceholderColor="#555555" 
+                           TextColor="Black"
+                           BackgroundColor="White" 
+                           Opacity="0.8"
+                           VerticalOptions="Center"
+                           HeightRequest="50"
+                           Margin="0,0,5,0"/>
+
+                    <Button x:Name="btnSave" 
+                            Grid.Column="1"
+                            Text="RECORD TRIP" 
+                            Clicked="OnRecordTripClicked" 
+                            BackgroundColor="#2196F3" 
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            Padding="20,0"/>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>
