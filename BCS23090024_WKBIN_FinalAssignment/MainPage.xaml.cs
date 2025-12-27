@@ -2,6 +2,7 @@
 using Microsoft.Maui.Networking;
 using BCS23090024_WKBIN_FinalAssignment.Models;
 using BCS23090024_WKBIN_FinalAssignment.Services;
+using System.Text.RegularExpressions;
 
 namespace BCS23090024_WKBIN_FinalAssignment;
 
@@ -41,20 +42,29 @@ public partial class MainPage : ContentPage
 
     private async void OnRecordTripClicked(object sender, EventArgs e)
     {
-        string tripId = entryTripID.Text;
+        string tripId = entryTripID.Text?.Trim() ?? "";
 
-        if (string.IsNullOrWhiteSpace(tripId))
+        string pattern = @"^[a-zA-Z]{2}[0-9]{3,4}$"; //formula is here
+        if (string.IsNullOrWhiteSpace(tripId) || !Regex.IsMatch(tripId, pattern))
         {
-            entryTripID.PlaceholderColor = Colors.Red; 
-            await DisplayAlert("Validation Failed", "Trip ID is required.", "OK");
-            return;
+            entryTripID.Text = string.Empty;
+
+            entryTripID.PlaceholderColor = Colors.Red;
+
+            entryTripID.Placeholder = "Invalid ID! (e.g., AB123)";
+
+            await DisplayAlert("Validation Failed", "Trip ID must be 2 letters followed by 3-4 numbers.", "OK");
+
+            return; 
         }
 
         entryTripID.PlaceholderColor = Colors.Gray;
+        entryTripID.Placeholder = "Enter Flight ID (e.g., OD1906)";
+        entryTripID.TextColor = Colors.Black;
 
         var newTrip = new FlightTrip
         {
-            TripID = tripId,
+            TripID = tripId.ToUpper(),
             LocationData = $"Lat: {lblLatitude.Text}, Long: {lblLongitude.Text}"
         };
 
