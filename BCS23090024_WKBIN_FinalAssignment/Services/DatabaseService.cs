@@ -22,5 +22,10 @@ namespace BCS23090024_WKBIN_FinalAssignment.Services
             await Init();
             return await _database!.InsertAsync(trip);
         }
+        public async Task<List<FlightTrip>> GetTripsAsync()
+        {
+            await Init();
+            return await _database!.Table<FlightTrip>().ToListAsync();
+        }
     }
 }
